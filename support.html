@@ -73,7 +73,7 @@ footer a { color: #fff; }
       <input id="order" name="order">
       <label for="message">Your message</label>
       <textarea id="message" name="message" required></textarea>
-      <input class="trap" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input class="trap" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button class="btn" id="send" type="submit">Send message</button>
       <p class="err" id="err" role="alert"></p>
       <p class="note">We use your name and email only to answer this message.</p>
@@ -95,25 +95,25 @@ footer a { color: #fff; }
   </div>
 </footer>
 <script>
-  // Messages go to the support mailbox through Web3Forms; the key identifies the form, and the destination
-  // address lives on Web3Forms' side, so no email address appears on this page.
-  const ACCESS_KEY = '';
+  // Messages go to the support mailbox through FormSubmit. FORM_ID is FormSubmit's alias for that mailbox
+  // (issued when the form was activated, 3 Nov 2026), so no email address appears on this page.
+  const FORM_ID = 'ec66bfdcbe2f9b96b40c9f818fa6d409';
   const form = document.getElementById('ticket'), send = document.getElementById('send'), err = document.getElementById('err');
   const ticketNo = () => { const d = new Date(), c = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
     return `CV-${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}-` + Array.from({ length: 4 }, () => c[Math.floor(Math.random() * c.length)]).join(''); };
-  if (!ACCESS_KEY) { send.disabled = true; send.textContent = 'Support opens soon'; }
+  if (!FORM_ID) { send.disabled = true; send.textContent = 'Support opens soon'; }
   form.addEventListener('submit', async (e) => {
     e.preventDefault(); err.classList.remove('show');
     const f = new FormData(form);
     if (!f.get('name') || !/^\S+@\S+\.\S+$/.test(f.get('email') || '') || !f.get('message')) { err.textContent = 'Please add your name, a valid email and a message.'; err.classList.add('show'); return; }
     const id = ticketNo();
     send.disabled = true; send.textContent = 'Sending…';
-    const body = { access_key: ACCESS_KEY, subject: `[${id}] ${f.get('topic')} · Clementine guide`, from_name: 'Clementine Vale support', ticket: id,
-      name: f.get('name'), email: f.get('email'), topic: f.get('topic'), order: f.get('order') || '-', message: f.get('message'), botcheck: f.get('botcheck') ? true : '' };
+    const body = { _subject: `[${id}] ${f.get('topic')} · Clementine guide`, _template: 'table', _captcha: 'false', _honey: f.get('_honey') || '', ticket: id,
+      name: f.get('name'), email: f.get('email'), topic: f.get('topic'), order: f.get('order') || '-', message: f.get('message') };
     try {
-      const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) });
+      const r = await fetch(`https://formsubmit.co/ajax/${FORM_ID}`, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) });
       const j = await r.json();
-      if (!j.success) throw new Error(j.message || 'Not sent');
+      if (String(j.success) !== 'true') throw new Error(j.message || 'Not sent');
       form.style.display = 'none'; document.getElementById('ticket-no').textContent = id; document.getElementById('done').classList.add('show');
     } catch (x) {
       err.textContent = "Sorry, that didn't send. Please try again in a minute."; err.classList.add('show');
