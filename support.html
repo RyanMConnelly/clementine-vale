@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support · Clementine Vale</title>
+<meta name="description" content="Questions about Thirty Old Rules, Judged? Send a message and you'll get a ticket number and a reply by email.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..600&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --blush:#f7e6e0; --cream:#fffaf6; --claret:#6b1f35; --claret-2:#4f1426; --ink:#2b1b20; --soft:#6e5a5f; --sage:#5f7a63; --sage-bg:#e3ebe2; --apricot:#c8743f; --line:#e9cfc6; --r:22px; }
+* { box-sizing: border-box; }
+html { background: var(--blush); }
+body { margin: 0; color: var(--ink); font: 19px/1.65 Figtree, system-ui, sans-serif; }
+a { color: var(--claret); }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+.narrow { max-width: 680px; margin: 0 auto; }
+h1, h2 { font-family: Fraunces, Georgia, serif; color: var(--claret); font-optical-sizing: auto; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 22px; padding-bottom: 22px; }
+.logo { font: 700 24px/1 Fraunces, serif; color: var(--claret); text-decoration: none; padding: 10px 0; }
+.logo i { font-weight: 400; }
+.toplink { font-weight: 600; font-size: 17px; text-decoration: none; padding: 12px 18px; border-radius: 999px; background: var(--cream); color: var(--claret); }
+.kicker { font-family: Fraunces, serif; font-style: italic; font-size: 21px; color: var(--apricot); margin: 40px 0 8px; }
+h1 { font-size: clamp(42px, 8vw, 72px); line-height: 1; font-weight: 800; letter-spacing: -.02em; margin: 0 0 18px; }
+.lead { font-size: 21px; color: var(--soft); margin: 0 0 40px; }
+.card { background: #fff; border-radius: var(--r); padding: 32px 28px; box-shadow: 0 2px 0 var(--line); margin-bottom: 96px; }
+label { display: block; font-weight: 600; margin: 0 0 8px; }
+.hint { font-weight: 400; color: var(--soft); font-size: 17px; }
+input, select, textarea { width: 100%; font: 19px/1.4 Figtree, sans-serif; color: var(--ink); background: var(--cream); border: 2px solid var(--line); border-radius: 14px; padding: 14px 16px; min-height: 54px; margin: 0 0 24px; }
+textarea { min-height: 170px; resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--apricot); }
+.trap { position: absolute; left: -9999px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 60px; padding: 16px 34px; border: 0; border-radius: 999px; background: var(--claret); color: var(--cream); font: 700 19px Figtree, sans-serif; box-shadow: 0 6px 0 var(--claret-2); cursor: pointer; }
+.btn:disabled { background: #a7838c; box-shadow: 0 6px 0 #8a6872; cursor: default; }
+.note { font-size: 17px; color: var(--soft); margin: 18px 0 0; }
+.done { display: none; text-align: center; }
+.done.show { display: block; }
+.done h2 { font-size: 36px; margin: 0 0 10px; }
+.ticket { display: inline-block; font: 700 26px/1 Figtree, sans-serif; letter-spacing: .06em; color: var(--sage); background: var(--sage-bg); border-radius: 14px; padding: 14px 20px; margin: 10px 0 18px; }
+.err { color: var(--claret); font-weight: 600; margin: 16px 0 0; display: none; }
+.err.show { display: block; }
+footer { background: var(--claret-2); color: #f3dcd4; padding: 48px 0 56px; font-size: 17px; }
+footer p { max-width: 36em; margin: 0 0 12px; }
+footer a { color: #fff; }
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <a class="logo" href="./">Clementine <i>Vale</i></a>
+  <a class="toplink" href="./">The guide</a>
+</header>
+
+<main class="wrap narrow">
+  <p class="kicker">support</p>
+  <h1>How can we help?</h1>
+  <p class="lead">A download that won't open, a question about the guide, or a refund. Send a message and you'll get a ticket number straight away, and a reply by email, usually within two working days.</p>
+
+  <div class="card">
+    <form id="ticket" novalidate>
+      <label for="name">Your name</label>
+      <input id="name" name="name" autocomplete="name" required>
+      <label for="email">Your email <span class="hint">(we reply here)</span></label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+      <label for="topic">What's it about?</label>
+      <select id="topic" name="topic">
+        <option>My download</option>
+        <option>A refund</option>
+        <option>A question about the guide</option>
+        <option>Something else</option>
+      </select>
+      <label for="order">Order or receipt number <span class="hint">(optional)</span></label>
+      <input id="order" name="order">
+      <label for="message">Your message</label>
+      <textarea id="message" name="message" required></textarea>
+      <input class="trap" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn" id="send" type="submit">Send message</button>
+      <p class="err" id="err" role="alert"></p>
+      <p class="note">We use your name and email only to answer this message.</p>
+    </form>
+    <div class="done" id="done" role="status">
+      <h2>Thank you. Message received.</h2>
+      <p>Your ticket number is</p>
+      <div class="ticket" id="ticket-no"></div>
+      <p>Keep it handy. We'll reply to the email you gave, usually within two working days.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="./" style="color:#fff">Clementine <i>Vale</i></a>
+    <p>Sold by Ryan Connelly, ABN 86 824 270 084, Melbourne, Australia.</p>
+    <p>Clementine Vale is a fictional AI character.</p>
+  </div>
+</footer>
+<script>
+  // Messages go to the support mailbox through Web3Forms; the key identifies the form, and the destination
+  // address lives on Web3Forms' side, so no email address appears on this page.
+  const ACCESS_KEY = '';
+  const form = document.getElementById('ticket'), send = document.getElementById('send'), err = document.getElementById('err');
+  const ticketNo = () => { const d = new Date(), c = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+    return `CV-${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}-` + Array.from({ length: 4 }, () => c[Math.floor(Math.random() * c.length)]).join(''); };
+  if (!ACCESS_KEY) { send.disabled = true; send.textContent = 'Support opens soon'; }
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); err.classList.remove('show');
+    const f = new FormData(form);
+    if (!f.get('name') || !/^\S+@\S+\.\S+$/.test(f.get('email') || '') || !f.get('message')) { err.textContent = 'Please add your name, a valid email and a message.'; err.classList.add('show'); return; }
+    const id = ticketNo();
+    send.disabled = true; send.textContent = 'Sending…';
+    const body = { access_key: ACCESS_KEY, subject: `[${id}] ${f.get('topic')} · Clementine guide`, from_name: 'Clementine Vale support', ticket: id,
+      name: f.get('name'), email: f.get('email'), topic: f.get('topic'), order: f.get('order') || '-', message: f.get('message'), botcheck: f.get('botcheck') ? true : '' };
+    try {
+      const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) });
+      const j = await r.json();
+      if (!j.success) throw new Error(j.message || 'Not sent');
+      form.style.display = 'none'; document.getElementById('ticket-no').textContent = id; document.getElementById('done').classList.add('show');
+    } catch (x) {
+      err.textContent = "Sorry, that didn't send. Please try again in a minute."; err.classList.add('show');
+      send.disabled = false; send.textContent = 'Send message';
+    }
+  });
+</script>
+</body>
+</html>
